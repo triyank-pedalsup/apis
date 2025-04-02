@@ -10,10 +10,6 @@ mongoose.connect("mongodb://localhost:27017/userCrud", { useNewUrlParser: true, 
         console.log("Error connecting to MongoDB:", err);
     });
 
-app.get("/test", (req, res) => {
-    res.send("Welcome to the Express.js server!!!");
-});
-
 app.listen(3000, () => {
     console.log("Server is running on port 3000");
 });
