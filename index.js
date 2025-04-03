@@ -1,19 +1,19 @@
-const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
+let express = require('express');
+let mongoose = require('mongoose');
+const router = require('./user/user.routes.js');
 
-mongoose.connect("mongodb://localhost:27017/userCrud", { useNewUrlParser: true, useUnifiedTopology: true })
-    .then(() => {
-        console.log("Connected to MongoDB successfully");
-    })
-    .catch((err) => {
-        console.log("Error connecting to MongoDB:", err);
-    });
+let app = express();
+app.use(express.json());
 
-app.get("/test", (req, res) => {
-    res.send("Welcome to the Express.js server!!!");
-});
+//connect to mongodb
+mongoose.connect("mongodb://localhost:27017/myDb").then(()=>{
+    console.log("Connected to MongoDB");    
+}).catch((err)=>{
+    console.log("Error connecting to MongoDB",err);
+})
 
-app.listen(3000, () => {
+app.use("/user",router);
+
+app.listen(3000,()=>{
     console.log("Server is running on port 3000");
-});
+})
