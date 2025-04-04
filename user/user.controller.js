@@ -2,9 +2,15 @@ const userService = require("./user.service.js");
 
 const createUser = async (req, res) => {
   try {
-    const user = await userService.createUser(req.body);
+    const { name, email, phoneNo } = req.body;
+    console.log("req.body", req.body);
+    if (typeof phoneNo !== 'number') {
+        throw new Error("Invalid phone number format");
+      }      
+    const user = await userService.createUser(name, email, phoneNo);
     res.status(201).json({ message: "User created successfully", data: user });
   } catch (error) {
+    console.log("error here", error);
     res.status(500).json({ message: "Error creating user", error: error.message });
   }
 };
