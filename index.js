@@ -1,19 +1,18 @@
-let express = require('express');
-let mongoose = require('mongoose');
-const router = require('./user/user.routes.js');
-
-let app = express();
+const express = require('express');
+const mongoose = require('mongoose');
+const globalRouter = require("./src/router/routes.js");
+const morgan = require('morgan'); 
+const app = express();
 app.use(express.json());
 
-//connect to mongodb
-mongoose.connect("mongodb://localhost:27017/myDb").then(()=>{
-    console.log("Connected to MongoDB");    
-}).catch((err)=>{
-    console.log("Error connecting to MongoDB");
-})
+app.use(morgan('dev'));
 
-app.use("/user",router);
+mongoose.connect("mongodb://localhost:27017/myDb")
+  .then(() => console.log("Connected to MongoDB"))    
+  .catch((err) => console.log("Error connecting to MongoDB:", err));
 
-app.listen(3000,()=>{
+app.use('/api', globalRouter);
+
+app.listen(3000, () => {
     console.log("Server is running on port 3000");
-})
+});
