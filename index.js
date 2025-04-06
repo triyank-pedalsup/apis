@@ -1,10 +1,12 @@
+require('dotenv').config();
+
 const express = require('express');
 const mongoose = require('mongoose');
-const globalRouter = require("./src/router/routes.js");
 const morgan = require('morgan'); 
+const globalRouter = require("./src/router/routes.js");
+
 const app = express();
 app.use(express.json());
-
 app.use(morgan('dev'));
 
 mongoose.connect("mongodb://localhost:27017/myDb")
@@ -14,5 +16,5 @@ mongoose.connect("mongodb://localhost:27017/myDb")
 app.use('/api', globalRouter);
 
 app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+    console.log(`Server is running on 3000`);
 });
