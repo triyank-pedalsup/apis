@@ -6,7 +6,7 @@ const bookings = new mongoose.Schema({
   bookingTime: { type: Number, required: true },
   totalPrice: { type: Number, required: true },
 });
-
+  
 const booking = mongoose.model("booking", bookings);
 
 module.exports = booking;
