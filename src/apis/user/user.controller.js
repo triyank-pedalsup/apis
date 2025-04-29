@@ -113,7 +113,7 @@ const createUserController = async (req, res) => {
   try {
     const userData = req.body;
     const newUser = await createUser(userData);
-
+  
     const payload = {
       id: req.params.id,
       email: req.email,
